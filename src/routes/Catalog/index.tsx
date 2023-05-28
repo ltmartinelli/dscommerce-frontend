@@ -35,18 +35,18 @@ export default function Catalog()
 
                     <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
                         
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
-                        <CatalogCard name={product.name} price={product.price} imgUrl={product.imgUrl}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
+                        <CatalogCard product={product}/>
                         
                     </div>
                     
