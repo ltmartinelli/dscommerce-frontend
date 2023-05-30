@@ -18,7 +18,7 @@ export default function ProductDetails()
 
     useEffect(() =>
     {
-        axios.get("http://localhost:8080/products/1").then(response => {
+        axios.get(`http://localhost:8080/products/${params.productId}`).then(response => {
             setProduct(response.data);
         })       
     }, []);
