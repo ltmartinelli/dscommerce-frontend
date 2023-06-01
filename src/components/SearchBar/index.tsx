@@ -2,8 +2,7 @@ import { useState } from 'react';
 import './styles.css';
 
 type Props = {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    onSearch: Function;
+    onSearch: (text : string) => void;
 }
 
 export default function SearchBar({ onSearch }: Props)
