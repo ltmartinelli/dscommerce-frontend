@@ -2,12 +2,10 @@ import { createContext } from "react";
 
 export type ContextCartCountType = {
     contextCartCount: number;
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    setContextCartCount: Function;
+    setContextCartCount: (contextCartCount: number) => void;
 }
 
 export const ContextCartCount = createContext<ContextCartCountType>({
     contextCartCount: 0,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setContextCartCount: () => {},
+    setContextCartCount: () => {0},
 })
