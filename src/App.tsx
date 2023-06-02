@@ -9,6 +9,9 @@ import Login from './routes/ClientHome/Login';
 import * as cartService from './services/cart-service.ts'
 import Admin from './routes/Admin/index.tsx';
 import AdminHome from './routes/Admin/AdminHome/index.tsx';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import {history} from './utils/history';
+
 
 export default function App()
 {
@@ -24,7 +27,7 @@ export default function App()
 
   return (
     <ContextCartCount.Provider value={{ contextCartCount, setContextCartCount }}>
-      <BrowserRouter>
+      <HistoryRouter history={history}>
         <Routes>
 
           <Route path="/" element={<ClientHome />}>
@@ -42,7 +45,7 @@ export default function App()
           <Route path="*" element={<Navigate to="/" />} />
 
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </ContextCartCount.Provider>
   );
 }
