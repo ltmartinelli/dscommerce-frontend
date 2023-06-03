@@ -12,13 +12,26 @@ import AdminHome from './routes/Admin/AdminHome/index.tsx';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { history } from './utils/history';
 import { PrivateRoute } from './components/PrivateRoute/index.tsx';
-
+import { AccessTokenPayloadDTO } from './models/auth.ts';
+import * as authService from './services/auth-service.ts'
+import { ContextToken } from './utils/context-token.ts';
 
 export default function App()
 {
 
   const [contextCartCount, setContextCartCount] = useState<number>(0);
 
+  const [contextTokenPayload, setContextTokenPayload] = useState<AccessTokenPayloadDTO>();
+
+
+  useEffect(() =>
+  {
+    if (authService.isAuthenticated())
+    {
+      const payload = authService.getAccessTokenPayload();
+      setContextTokenPayload(payload);
+    }
+  }, []);
 
   useEffect(() =>
   {
@@ -27,26 +40,28 @@ export default function App()
   }, [])
 
   return (
-    <ContextCartCount.Provider value={{ contextCartCount, setContextCartCount }}>
-      <HistoryRouter history={history}>
-        <Routes>
+    <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
+      <ContextCartCount.Provider value={{ contextCartCount, setContextCartCount }}>
+        <HistoryRouter history={history}>
+          <Routes>
 
-          <Route path="/" element={<ClientHome />}>
-            <Route index element={<Catalog />} />
-            <Route path="catalog" element={<Catalog />} />
-            <Route path="product-details/:productId" element={<ProductDetails />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="login" element={<Login />} />
-          </Route>
+            <Route path="/" element={<ClientHome />}>
+              <Route index element={<Catalog />} />
+              <Route path="catalog" element={<Catalog />} />
+              <Route path="product-details/:productId" element={<ProductDetails />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="login" element={<Login />} />
+            </Route>
 
-          <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
-            <Route index element={<AdminHome />} />
-          </Route>
+            <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
+              <Route index element={<AdminHome />} />
+            </Route>
 
-          <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/" />} />
 
-        </Routes>
-      </HistoryRouter>
-    </ContextCartCount.Provider>
+          </Routes>
+        </HistoryRouter>
+      </ContextCartCount.Provider>
+    </ContextToken.Provider>
   );
 }
