@@ -6,6 +6,8 @@ import * as productService from '../../../services/product-service.ts'
 import { ProductDTO } from '../../../models/product';
 import SearchBar from '../../../components/SearchBar/index.tsx';
 import ButtonNextPage from '../../../components/ButtonNextPage/index.tsx';
+import DialogInfo from '../../../components/DialogInfo/index.tsx';
+import DialogConfirmation from '../../../components/DialogConfirmation/index.tsx';
 
 
 type QueryParams = {
@@ -15,6 +17,10 @@ type QueryParams = {
 
 export default function ProductListing()
 {
+
+    const [dialogInfoData, setDialogInfoData] = useState({ visible: false, message: "Operação realizada com sucesso!" });
+
+    const [dialogConfirmationData, setDialogConfirmationData] = useState({ visible: false, message: "Tem certeza?" });
 
     const [isLastPage, setIsLastPage] = useState(false);
 
@@ -45,6 +51,22 @@ export default function ProductListing()
     function handleNextPageClick()
     {
         setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+    }
+
+    function handleDialogInfoClose()
+    {
+        setDialogInfoData({ ...dialogInfoData, visible: false });
+    }
+
+    function handleDeleteClick()
+    {
+        setDialogConfirmationData({ ...dialogConfirmationData, visible: true });
+    }
+
+    function handleDialogConfirmationAnswer(answer: boolean)
+    {
+        setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
+        console.log(answer);
     }
 
     return (
@@ -80,7 +102,7 @@ export default function ProductListing()
                                     <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
                                     <td className="dsc-txt-left">{product.name}</td>
                                     <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                                    <td><img onClick={handleDeleteClick} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                                 </tr>
                             ))
                         }
@@ -92,7 +114,17 @@ export default function ProductListing()
                     !isLastPage &&
                     <ButtonNextPage onNextPage={handleNextPageClick} />
                 }
+
+
             </section>
+            {
+                dialogInfoData.visible &&
+                <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />
+            }
+            {
+                dialogConfirmationData.visible &&
+                <DialogConfirmation message={dialogConfirmationData.message} onDialogAnswer={handleDialogConfirmationAnswer} />
+            }
         </main>
     );
 }
