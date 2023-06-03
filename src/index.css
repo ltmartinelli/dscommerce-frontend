@@ -87,11 +87,6 @@ header {
   padding: 0 20px;
 }
 
-.dsc-header-admin {
-  background-color: var(--dsc-color-bg-quaternary);
-  color: var(--dsc-color-font-tertiary);
-}
-
 nav {
   display: flex;
   justify-content: space-between;
@@ -146,8 +141,10 @@ nav a {
   font-size: 12px;
 }
 
-.dsc-logged-user a {
+.dsc-logged-user span {
   font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 @media (min-width: 576px) {
