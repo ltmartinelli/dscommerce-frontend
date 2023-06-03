@@ -27,8 +27,6 @@ export default function Catalog()
 
     useEffect(() =>
     {      
-        console.log(hasAnyRoles([]));
-
         productService.findPageRequest(queryParams.page, queryParams.name).then(response =>
         {
             const nextPage = response.data.content;
