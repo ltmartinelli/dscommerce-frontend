@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react';
 import FormInput from '../../../components/FormInput';
 import * as forms from '../../../utils/forms.ts'
 import * as productService from '../../../services/product-service.ts';
+import * as categoryService from '../../../services/category-service.ts';
 import FormTextArea from '../../../components/FormTextArea/index.tsx';
+import Select from 'react-select'
+import { CategoryDTO } from '../../../models/category.ts';
 
 
 export default function ProductForm()
@@ -13,6 +16,8 @@ export default function ProductForm()
   const params = useParams();
 
   const isEditing = params.productId !== 'create';
+
+  const [categories, setCategories] = useState<CategoryDTO[]>([]);
 
   const [formData, setFormData] = useState<any>({
     name: {
@@ -56,6 +61,12 @@ export default function ProductForm()
 
   useEffect(() =>
   {
+    categoryService.findAllRequest()
+      .then(response => setCategories(response.data))
+  }, [])
+
+  useEffect(() =>
+  {
     if (isEditing)
     {
       productService.findById(Number(params.productId))
@@ -88,6 +99,7 @@ export default function ProductForm()
           <form className="dsc-card dsc-form">
             <h2>Dados do produto</h2>
             <div className="dsc-form-controls-container">
+
               <div>
                 <FormInput
                   {...formData.name}
@@ -97,6 +109,7 @@ export default function ProductForm()
                 />
                 <div className="dsc-form-error">{formData.name.message}</div>
               </div>
+
               <div>
                 <FormInput
                   {...formData.price}
@@ -106,6 +119,7 @@ export default function ProductForm()
                 />
                 <div className="dsc-form-error">{formData.price.message}</div>
               </div>
+
               <div>
                 <FormInput
                   {...formData.imgUrl}
@@ -114,6 +128,16 @@ export default function ProductForm()
                   onChange={handleInputChange}
                 />
               </div>
+
+              <div>
+                <Select
+                  options={categories}
+                  isMulti
+                  getOptionLabel={(obj) => obj.name}
+                  getOptionValue={(obj) => String(obj.id)}
+                />
+              </div>
+
               <div>
                 <FormTextArea
                   {...formData.description}
@@ -123,6 +147,7 @@ export default function ProductForm()
                 />
                 <div className="dsc-form-error">{formData.description.message}</div>
               </div>
+
             </div>
 
             <div className="dsc-product-form-buttons">
