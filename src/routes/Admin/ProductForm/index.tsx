@@ -8,6 +8,7 @@ import * as categoryService from '../../../services/category-service.ts';
 import FormTextArea from '../../../components/FormTextArea/index.tsx';
 import { CategoryDTO } from '../../../models/category.ts';
 import FormSelect from '../../../components/FormSelect/index.tsx';
+import { selectStyles } from '../../../utils/select.ts';
 
 
 export default function ProductForm()
@@ -140,7 +141,8 @@ export default function ProductForm()
               <div>
                 <FormSelect
                   {...formData.categories}
-                  className="dsc-form-control"
+                  className="dsc-form-control dsc-form-select-container"
+                  styles = {selectStyles}
                   options={categories}
                   onTurnDirty={handleTurnDirty}
                   onChange={(obj: any) =>
