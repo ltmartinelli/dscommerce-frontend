@@ -20,7 +20,7 @@ type QueryParams = {
 export default function ProductListing()
 {
 
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [dialogInfoData, setDialogInfoData] = useState({
         visible: false,
@@ -72,6 +72,11 @@ const navigate = useNavigate();
     function handleDeleteClick(productId: number)
     {
         setDialogConfirmationData({ ...dialogConfirmationData, visible: true, id: productId });
+    }
+
+    function handleUpdateClick(productId: number)
+    {
+        navigate(`/admin/products/${productId}`)
     }
 
     function handleDialogConfirmationAnswer(answer: boolean, productId: number)
@@ -129,7 +134,7 @@ const navigate = useNavigate();
                                     <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name} /></td>
                                     <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
                                     <td className="dsc-txt-left">{product.name}</td>
-                                    <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                                    <td><img onClick={() => handleUpdateClick(product.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
                                     <td><img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                                 </tr>
                             ))
