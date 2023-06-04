@@ -18,9 +18,16 @@ type QueryParams = {
 export default function ProductListing()
 {
 
-    const [dialogInfoData, setDialogInfoData] = useState({ visible: false, message: "Operação realizada com sucesso!" });
+    const [dialogInfoData, setDialogInfoData] = useState({
+        visible: false,
+        message: "Operação realizada com sucesso!"
+    });
 
-    const [dialogConfirmationData, setDialogConfirmationData] = useState({ visible: false, message: "Tem certeza?" });
+    const [dialogConfirmationData, setDialogConfirmationData] = useState({
+        visible: false,
+        message: "Tem certeza?",
+        id: 0,
+    });
 
     const [isLastPage, setIsLastPage] = useState(false);
 
@@ -58,15 +65,25 @@ export default function ProductListing()
         setDialogInfoData({ ...dialogInfoData, visible: false });
     }
 
-    function handleDeleteClick()
+    function handleDeleteClick(productId: number)
     {
-        setDialogConfirmationData({ ...dialogConfirmationData, visible: true });
+        setDialogConfirmationData({ ...dialogConfirmationData, visible: true, id: productId });
     }
 
-    function handleDialogConfirmationAnswer(answer: boolean)
+    function handleDialogConfirmationAnswer(answer: boolean, productId: number)
     {
+        if (answer)
+        {
+            productService.deleteById(productId)
+                .then(() =>
+                {
+                    setProducts([]);
+                    setQueryParams({ ...queryParams, page: 0 });
+                })
+                .catch(error => setDialogInfoData({visible:true, message: error.response.data.error}));
+        }
+
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
-        console.log(answer);
     }
 
     return (
@@ -97,12 +114,12 @@ export default function ProductListing()
                         {
                             products.map(product => (
                                 <tr key={product.id}>
-                                    <td className="dsc-tb576">341</td>
+                                    <td className="dsc-tb576">{product.id}</td>
                                     <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name} /></td>
                                     <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
                                     <td className="dsc-txt-left">{product.name}</td>
                                     <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img onClick={handleDeleteClick} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                                    <td><img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                                 </tr>
                             ))
                         }
@@ -119,11 +136,16 @@ export default function ProductListing()
             </section>
             {
                 dialogInfoData.visible &&
-                <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />
+                <DialogInfo
+                    message={dialogInfoData.message}
+                    onDialogClose={handleDialogInfoClose} />
             }
             {
                 dialogConfirmationData.visible &&
-                <DialogConfirmation message={dialogConfirmationData.message} onDialogAnswer={handleDialogConfirmationAnswer} />
+                <DialogConfirmation
+                    id={dialogConfirmationData.id}
+                    message={dialogConfirmationData.message}
+                    onDialogAnswer={handleDialogConfirmationAnswer} />
             }
         </main>
     );
