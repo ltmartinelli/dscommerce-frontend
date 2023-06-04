@@ -6,8 +6,8 @@ import * as forms from '../../../utils/forms.ts'
 import * as productService from '../../../services/product-service.ts';
 import * as categoryService from '../../../services/category-service.ts';
 import FormTextArea from '../../../components/FormTextArea/index.tsx';
-import Select from 'react-select'
 import { CategoryDTO } from '../../../models/category.ts';
+import FormSelect from '../../../components/FormSelect/index.tsx';
 
 
 export default function ProductForm()
@@ -56,6 +56,14 @@ export default function ProductForm()
       placeholder: "Descrição",
       validation: function (nameValue: string) { return nameValue.length >= 10 },
       message: "Favor informar uma descrição de no mínimo 10 caracteres."
+    },
+    categories: {
+      value: [],
+      id: "categories",
+      name: "categories",
+      placeholder: "Categorias",
+      validation: function (categoryValue: CategoryDTO[]) { return categoryValue.length > 0 },
+      message: "Favor selecionar ao menos uma categoria."
     }
   })
 
@@ -130,12 +138,21 @@ export default function ProductForm()
               </div>
 
               <div>
-                <Select
+                <FormSelect
+                  {...formData.categories}
+                  className="dsc-form-control"
                   options={categories}
+                  onTurnDirty={handleTurnDirty}
+                  onChange={(obj: any) =>
+                  {
+                    const newFormData = forms.updateAndValidate(formData, "categories", obj);
+                    setFormData(newFormData);
+                  }}
                   isMulti
-                  getOptionLabel={(obj) => obj.name}
-                  getOptionValue={(obj) => String(obj.id)}
+                  getOptionLabel={(obj: any) => obj.name}
+                  getOptionValue={(obj: any) => String(obj.id)}
                 />
+                 <div className="dsc-form-error">{formData.categories.message}</div>
               </div>
 
               <div>
