@@ -6,6 +6,7 @@ import * as authService from '../../../services/auth-service.ts'
 import { useNavigate } from 'react-router-dom';
 import { ContextToken } from '../../../utils/context-token.ts';
 import FormInput from '../../../components/FormInput/index.tsx';
+import * as forms from '../../../utils/forms.ts'
 
 export default function Login()
 {
@@ -54,8 +55,7 @@ export default function Login()
         const name = event.target.name;
         const value = event.target.value;
 
-        setFormData({ ...formData, [name]: { ...formData[name], value: value } });
-
+        setFormData(forms.update(formData, name, value));
     }
 
     return (
