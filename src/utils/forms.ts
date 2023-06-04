@@ -40,3 +40,18 @@ export function toDirty(inputs: any, name: string)
 {
     return { ...inputs, [name]: { ...inputs[name], dirty: "true" } };
 }
+
+
+export function updateAndValidate(inputs: any, name: string, newValue: any)
+{
+    const updatedData = update(inputs, name, newValue);
+    const validatedData = validate(updatedData, name);
+    return validatedData;
+}
+
+export function dirtyAndValidate(inputs: any, name: string)
+{
+    const dirtyData = toDirty(inputs, name,);
+    const validatedData = validate(dirtyData, name);
+    return validatedData;
+}
