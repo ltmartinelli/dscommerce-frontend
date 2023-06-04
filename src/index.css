@@ -240,7 +240,7 @@ nav a {
   color: var(--dsc-color-font-placeholder);
 }
 
-.dsc-form-control[data-invalid="true"] {
+.dsc-form-control[data-invalid="true"][data-dirty="true"] {
   border: 1px solid var(--dsc-color-error);
 }
 
@@ -251,9 +251,9 @@ nav a {
   display: none;
 }
 
-.dsc-form-control[data-invalid="true"] ~ div {
+.dsc-form-control[data-invalid="true"][data-dirty="true"]~div {
   display: unset;
-  }
+}
 
 .dsc-select:invalid {
   color: var(--dsc-color-font-placeholder);
