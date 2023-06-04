@@ -240,7 +240,7 @@ nav a {
   color: var(--dsc-color-font-placeholder);
 }
 
-.dsc-input-error {
+.dsc-form-control[data-invalid="true"] {
   border: 1px solid var(--dsc-color-error);
 }
 
@@ -248,7 +248,12 @@ nav a {
   color: var(--dsc-color-error);
   font-size: 12px;
   padding-left: 4px;
+  display: none;
 }
+
+.dsc-form-control[data-invalid="true"] ~ div {
+  display: unset;
+  }
 
 .dsc-select:invalid {
   color: var(--dsc-color-font-placeholder);
@@ -389,13 +394,13 @@ nav a {
 
 }
 
-.dsc-dialog-box h2{
+.dsc-dialog-box h2 {
   font-size: 20px;
   color: var(--dsc-color-font-primary);
   margin-bottom: 20px;
 }
 
-.dsc-dialog-btn-container{
+.dsc-dialog-btn-container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -403,6 +408,6 @@ nav a {
 }
 
 
-.dsc-dialog-btn{
+.dsc-dialog-btn {
   width: 100%;
 }
