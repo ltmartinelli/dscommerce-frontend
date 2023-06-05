@@ -1,11 +1,10 @@
-import './styles.css';
-import SearchBar from '../../../components/SearchBar';
-import CatalogCard from '../../../components/CatalogCard';
-import ButtonNextPage from '../../../components/ButtonNextPage';
-import { ProductDTO } from '../../../models/product.ts';
 import { useEffect, useState } from 'react';
-import * as productService from '../../../services/product-service.ts'
-import { hasAnyRoles, isAuthenticated } from '../../../services/auth-service.ts';
+import ButtonNextPage from '../../../components/ButtonNextPage';
+import CatalogCard from '../../../components/CatalogCard';
+import SearchBar from '../../../components/SearchBar';
+import { ProductDTO } from '../../../models/product.ts';
+import * as productService from '../../../services/product-service.ts';
+import './styles.css';
 
 
 type QueryParams = {
@@ -26,7 +25,7 @@ export default function Catalog()
         });
 
     useEffect(() =>
-    {      
+    {
         productService.findPageRequest(queryParams.page, queryParams.name).then(response =>
         {
             const nextPage = response.data.content;

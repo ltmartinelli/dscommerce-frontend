@@ -1,10 +1,10 @@
-import './styles.css';
-import * as cartService from '../../../services/cart-service.ts';
-import { OrderDTO } from '../../../models/order';
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { OrderDTO } from '../../../models/order';
+import * as cartService from '../../../services/cart-service.ts';
+import * as orderService from '../../../services/order-service.ts';
 import { ContextCartCount } from '../../../utils/context-cart.ts';
-import * as orderService from '../../../services/order-service.ts'
+import './styles.css';
 
 
 export default function Cart()

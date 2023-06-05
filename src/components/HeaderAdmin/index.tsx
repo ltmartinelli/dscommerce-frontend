@@ -12,14 +12,14 @@ export default function HeaderAdmin()
             <h1>DSC Admin</h1>
             <div className="dsc-navbar-right">
                 <div className="dsc-menu-items-container">
-                    <NavLink to="/admin/home" className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
+                    <NavLink to="/admin/home" className={({ isActive }) => isActive ? "dsc-menu-item-active" : ""}>
                         <div className="dsc-menu-item">
                             <img src={homeIcon} alt="Início" />
                             <p>Início</p>
                         </div>
                     </NavLink>
 
-                    <NavLink to="/admin/products" className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}>
+                    <NavLink to="/admin/products" className={({ isActive }) => isActive ? "dsc-menu-item-active" : ""}>
                         <div className="dsc-menu-item">
                             <img src={productsIcon} alt="Cadastro de produtos" />
                             <p>Produtos</p>

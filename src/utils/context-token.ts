@@ -7,5 +7,5 @@ export type ContextTokenType = {
 }
 export const ContextToken = createContext<ContextTokenType>({
     contextTokenPayload: undefined,
-    setContextTokenPayload: () => {undefined}
+    setContextTokenPayload: () => { undefined }
 });

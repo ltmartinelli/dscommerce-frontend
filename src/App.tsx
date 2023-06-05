@@ -1,23 +1,22 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Catalog from './routes/ClientHome/Catalog';
-import ProductDetails from './routes/ClientHome/ProductDetails';
-import ClientHome from './routes/ClientHome';
-import Cart from './routes/ClientHome/Cart';
 import { useEffect, useState } from 'react';
-import { ContextCartCount, ContextCartCountType } from './utils/context-cart';
-import Login from './routes/ClientHome/Login';
-import * as cartService from './services/cart-service.ts'
-import Admin from './routes/Admin/index.tsx';
-import AdminHome from './routes/Admin/AdminHome/index.tsx';
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-import { history } from './utils/history';
+import { unstable_HistoryRouter as HistoryRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute/index.tsx';
 import { AccessTokenPayloadDTO } from './models/auth.ts';
-import * as authService from './services/auth-service.ts'
-import { ContextToken } from './utils/context-token.ts';
-import Confirmation from './routes/ClientHome/Confirmation/index.tsx';
-import ProductListing from './routes/Admin/ProductListing/index.tsx';
+import AdminHome from './routes/Admin/AdminHome/index.tsx';
 import ProductForm from './routes/Admin/ProductForm/index.tsx';
+import ProductListing from './routes/Admin/ProductListing/index.tsx';
+import Admin from './routes/Admin/index.tsx';
+import ClientHome from './routes/ClientHome';
+import Cart from './routes/ClientHome/Cart';
+import Catalog from './routes/ClientHome/Catalog';
+import Confirmation from './routes/ClientHome/Confirmation/index.tsx';
+import Login from './routes/ClientHome/Login';
+import ProductDetails from './routes/ClientHome/ProductDetails';
+import * as authService from './services/auth-service.ts';
+import * as cartService from './services/cart-service.ts';
+import { ContextCartCount } from './utils/context-cart';
+import { ContextToken } from './utils/context-token.ts';
+import { history } from './utils/history';
 
 export default function App()
 {
@@ -58,10 +57,10 @@ export default function App()
             </Route>
 
             <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
-              <Route index element={<Navigate to="/admin/home"/>} />
+              <Route index element={<Navigate to="/admin/home" />} />
               <Route path="home" element={<AdminHome />} />
               <Route path="products" element={<ProductListing />} />
-              <Route path="products/:productId" element={<ProductForm/>}/>
+              <Route path="products/:productId" element={<ProductForm />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" />} />

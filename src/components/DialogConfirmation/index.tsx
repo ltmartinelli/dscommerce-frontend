@@ -6,7 +6,7 @@ type Props = {
     message: string,
     // eslint-disable-next-line @typescript-eslint/ban-types
     onDialogAnswer: Function,
-    
+
 }
 
 export default function DialogConfirmation({ message, onDialogAnswer, id }: Props)

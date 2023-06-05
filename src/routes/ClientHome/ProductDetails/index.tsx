@@ -20,7 +20,7 @@ export default function ProductDetails()
 
     const [product, setProduct] = useState<ProductDTO>();
 
-    const {setContextCartCount} = useContext(ContextCartCount);
+    const { setContextCartCount } = useContext(ContextCartCount);
 
     useEffect(() =>
     {

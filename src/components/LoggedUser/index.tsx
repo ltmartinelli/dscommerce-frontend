@@ -13,7 +13,7 @@ export default function LoggedUser()
         authService.logout();
         setContextTokenPayload(undefined);
         navigate("/login");
-        
+
     }
 
     return (
