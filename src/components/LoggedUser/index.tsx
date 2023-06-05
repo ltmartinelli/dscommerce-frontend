@@ -8,7 +8,7 @@ export default function LoggedUser()
     const { contextTokenPayload, setContextTokenPayload } = useContext(ContextToken);
     const navigate = useNavigate();
 
-    function handleLogoutClick(event: any)
+    function handleLogoutClick()
     {
         authService.logout();
         setContextTokenPayload(undefined);

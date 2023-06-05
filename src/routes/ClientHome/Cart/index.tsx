@@ -37,7 +37,7 @@ export default function Cart()
     }
 
 
-    function handlePlaceOrderClick(event: any)
+    function handlePlaceOrderClick()
     {
         orderService.placeOrderRequest(cart)
             .then(response =>

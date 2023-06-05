@@ -2,7 +2,7 @@ import homeIcon from '../../assets/home.svg';
 import productsIcon from '../../assets/products.svg';
 import LoggedUser from '../LoggedUser';
 import './styles.css'
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function HeaderAdmin()
 {

@@ -95,7 +95,7 @@ export default function ProductListing()
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
     }
 
-    function handleNewProductClick(event: any)
+    function handleNewProductClick()
     {
         navigate("/admin/products/create");
     }
